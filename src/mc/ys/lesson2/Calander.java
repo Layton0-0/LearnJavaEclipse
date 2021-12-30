@@ -6,7 +6,11 @@ public class Calander {
 
 	public static void main(String[] args) {
 		int year = 0, month = 0;
-		int re = 0, tab = 0;
+		int re = 0;
+		int[] space = new int[12];
+		int [] monthLastDay = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+		
+		// 입력받기
 		Scanner sc = new Scanner(System.in);
 		while(true) { // 사용자가 원하는 만큼 반복
 			while(true) { // 연도를 제대로 입력받을 때까지 반복
@@ -20,7 +24,19 @@ public class Calander {
 					break;
 				System.out.println("정확한 연도를 입력해주세요.");
 			}
-			printCal(year, month);
+			//윤년 계산
+			if((year % 400 == 0) || (year % 4 == 0 && year % 100 != 0))
+				monthLastDay[1] = 29;
+			// 입력받은 해의 공백 전부 저장
+			space = calCal(year, monthLastDay);
+			
+			// 월을 입력받았는지 여부 확인
+			if(month >= 1 && month <= 12) {
+				printAMonth(year, month, space, monthLastDay);
+			} else {
+				printAll(year, space, monthLastDay);
+			}
+			
 			// 재시작 조건 넣기
 			System.out.println("다시 시작하시겠습니까? 맞으면 1, 아니면 아무 숫자를 입력하세요: ");
 			re = sc.nextInt();
@@ -29,44 +45,43 @@ public class Calander {
 		}
 				
 	}
-	//월별로 분류
-	static void printCal(int year, int month) {
-		switch(month) {
-		case 1:
-		case 3:
-		case 5:
-		case 7:
-		case 8:
-		case 10:
-		case 12:
-			printStart(year, month, 31);
-			break;
-		case 4:
-		case 6:
-		case 9:
-		case 11:
-			printStart(year, month, 30);
-			break;
-		case 2:
-			printStart(year, month, 28);
-			break;
-		default: // 12개월 전부 출력
-			for(int i = 1; i <= 12; i++) 
-				printCal(year, i);
+	
+	// 연도별 월별 공백 데이터를 미리 계산해서 배열로 저장
+	static int[] calCal(int year, int[] lastDay) { 
+		int month = 1;
+		int[] yearSpace = {3, 5, 6, 0, 1};
+		int[] space = new int[12];
+		space[0] = yearSpace[year - 2020];
+		for(int i = 1; i < 12; i++) {	
+			space[i] = (lastDay[month - 1] + space[i-1]) % 7;
+			month++;
 		}
-		
+		return space;
 	}
 	
-	//달력을 출력
-	static void printStart(int year, int month, int date) {
-		System.out.println(year + "년 " + month + "월 ");
-		System.out.println("일\t월\t화\t수\t목\t금\t토");
-		for(int i = 1; i <= date; i++) {
-			System.out.print(i + "\t");
-			if(i%7 == 0)
-				System.out.println();
+	// 전 월 모두 출력
+	static void printAll(int year, int[] space, int[] lastDay) {
+		int month = 1;
+		while(month <= 12) {
+			printAMonth(year, month, space, lastDay);	
+			month++;
 		}
-		System.out.println();
+	}
+	// 한 월만 출력
+	static void printAMonth(int year, int month, int[] space, int[] lastDay) {
+		int tab = space[month - 1];
+		System.out.println(year + "년 " + month + "월");
+		System.out.println("일\t월\t화\t수\t목\t금\t토");
+		
+		for(int i = 0; i < tab; i++)
+			System.out.print("\t");
+		
+		for(int i = 1; i <= lastDay[month - 1]; i++) {
+			System.out.print(i + "\t");
+			tab += 1;
+			if(tab % 7 == 0)
+				System.out.println();
+		} System.out.println("\n");
 	}
 
 }
