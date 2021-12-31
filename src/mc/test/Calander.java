@@ -1,4 +1,4 @@
-package mc.ys.lesson2;
+package mc.test;
 
 import java.util.Scanner;
 
@@ -42,7 +42,9 @@ public class Calander {
 			re = sc.nextInt();
 			if(re != 1)
 				break;
+			
 		}
+		sc.close();
 				
 	}
 	
