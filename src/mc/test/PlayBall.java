@@ -84,7 +84,7 @@ public class PlayBall {
 			userNum = getNum();
 			result = compareNum(comNum, userNum);
 			System.out.printf("컴퓨터: %s \t사람: %s\n", comNum, userNum);
-			System.out.printf("%d 스트라이크 %d 볼\n", result[0], result[1]);
+			System.out.printf("%d 스트라이크 %d 볼\n\n", result[0], result[1]);
 			System.out.print("기권하시려면 1, 계속하시려면 아무 숫자나 눌러주세요: ");
 			int doOrNot = sc.nextInt();
 			if(doOrNot == 1) {

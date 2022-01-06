@@ -2,17 +2,29 @@ package mc.ys.lesson6;
 import java.util.Random;
 
 public class LottoBall {
-	int[] ballNumber;
-	boolean isSelected;
+	private int ballNumber;
+	private boolean isSelected;
 	Random rand = new Random();
 	
-	LottoBall(){
-		for(int i = 0; i < 6; i++) {
-			ballNumber[i] = rand.nextInt(45) + 1;
-		}
+	public LottoBall(int ballNumber){
+		this.ballNumber = ballNumber;
 	}
 	
+	public int getBallNumber() {
+		return ballNumber;
+	}
 	
+	public boolean getIsSelected() {
+		return isSelected;
+	}
+	
+	private void setBallNumber(int ballNumber) {
+		this.ballNumber = ballNumber;
+	}
+	
+	public void setIsSelected(boolean isSelected) {
+		this.isSelected = isSelected;
+	}
 	
 
 }

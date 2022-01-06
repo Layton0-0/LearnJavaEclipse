@@ -22,8 +22,13 @@ public class LottoMachine {
 			System.out.print(e + "\t");
 		}
 		System.out.println();
+		
+
+		
 		return ball;
 	}
+	
+	
 	
 
 }
