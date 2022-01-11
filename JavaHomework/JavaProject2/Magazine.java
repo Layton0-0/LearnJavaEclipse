@@ -1,4 +1,4 @@
-package javaProject2;
+package avaProject2;
 
 public class Magazine extends Book {
 	int month;
