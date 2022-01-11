@@ -1,14 +1,14 @@
-package javaProject1;
+package JavaProject1;
 
 public class ProductTest {
 
 	public static void main(String[] args) {
-		Product laptop = new Product("001", "³ëÆ®ºÏ", 1200000, 2021, "»ï¼º");
-		Product monitor = new Product("002", "¸ğ´ÏÅÍ", 300000, 2021, "LG");
-		Product mouse = new Product("003", "¸¶¿ì½º", 30000, 2020, "·ÎÁöÅØ");
+		Product laptop = new Product("001", "ë…¸íŠ¸ë¶", 1200000, 2021, "ì‚¼ì„±");
+		Product monitor = new Product("002", "ëª¨ë‹ˆí„°", 300000, 2021, "LG");
+		Product mouse = new Product("003", "ë§ˆìš°ìŠ¤", 30000, 2020, "ë¡œì§€í…");
 		
 		
-		System.out.println("»óÇ°¹øÈ£\t»óÇ°¸í \t°¡°İ \t¿¬µµ \tÁ¦Á¶»ç");
+		System.out.println("ìƒí’ˆë²ˆí˜¸\tìƒí’ˆëª… \tê°€ê²© \tì—°ë„ \tì œì¡°ì‚¬");
 		System.out.println("-------------------------------------");
 		System.out.println(laptop);
 		System.out.println(monitor);
