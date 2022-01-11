@@ -1,4 +1,4 @@
-package avaProject2;
+package JavaProject2;
 
 public class BookTest {
 
