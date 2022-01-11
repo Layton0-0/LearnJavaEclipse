@@ -1,23 +1,23 @@
-package javaProject2;
+package avaProject2;
 
 public class BookTest {
 
 	public static void main(String[] args) {
-		Book javaPro = new Book("B001", "ÀÚ¹Ù ÇÁ·Î±×·¡¹Ö", "È«±æµ¿", 25000, 2021, "¸ÖÆ¼ÃâÆÇ»ç");
-		Book javaScript = new Book("B002", "ÀÚ¹Ù½ºÅ©¸³Æ®", "ÀÌ¸ù·æ", 30000, 2020, "¼­¿ïÃâÆÇ»ç");
-		Book hc = new Book("B003", "HTML/CSS", "¼ºÃáÇâ", 18000, 2021, "°­³²ÃâÆÇ»ç");
+		Book javaPro = new Book("B001", "ìë°” í”„ë¡œê·¸ë˜ë°", "í™ê¸¸ë™", 25000, 2021, "ë©€í‹°ì¶œíŒì‚¬");
+		Book javaScript = new Book("B002", "ìë°”ìŠ¤í¬ë¦½íŠ¸", "ì´ëª½ë£¡", 30000, 2020, "ì„œìš¸ì¶œíŒì‚¬");
+		Book hc = new Book("B003", "HTML/CSS", "ì„±ì¶˜í–¥", 18000, 2021, "ê°•ë‚¨ì¶œíŒì‚¬");
 		
-		Magazine javaWorld = new Magazine("M001", "ÀÚ¹Ù ¿ùµå", "È«±æµ¿", 25000, 2021, "¸ÖÆ¼ÃâÆÇ»ç", 5);
-		Magazine webWorld = new Magazine("M002", "À¥ ¿ùµå", "ÀÌ¸ù·æ", 30000, 2020, "¼­¿ïÃâÆÇ»ç", 7);
-		Magazine gameWorld = new Magazine("M003", "°ÔÀÓ ¿ùµå", "¼ºÃáÇâ", 18000, 2021, "°­³²ÃâÆÇ»ç", 9);
+		Magazine javaWorld = new Magazine("M001", "ìë°” ì›”ë“œ", "í™ê¸¸ë™", 25000, 2021, "ë©€í‹°ì¶œíŒì‚¬", 5);
+		Magazine webWorld = new Magazine("M002", "ì›¹ ì›”ë“œ", "ì´ëª½ë£¡", 30000, 2020, "ì„œìš¸ì¶œíŒì‚¬", 7);
+		Magazine gameWorld = new Magazine("M003", "ê²Œì„ ì›”ë“œ", "ì„±ì¶˜í–¥", 18000, 2021, "ê°•ë‚¨ì¶œíŒì‚¬", 9);
 		
-		System.out.println("µµ¼­¹øÈ£\t µµ¼­¸í\t\t ÀúÀÚ\t °¡°İ\t ¹ßÇàÀÏ\t ÃâÆÇ»ç");
+		System.out.println("ë„ì„œë²ˆí˜¸\t ë„ì„œëª…\t\t ì €ì\t ê°€ê²©\t ë°œí–‰ì¼\t ì¶œíŒì‚¬");
 		System.out.println("-----------------------------------------------------------");
 		System.out.println(javaPro);
 		System.out.println(javaScript);
 		System.out.println(hc);
 				
-		System.out.println("\nÀâÁö¹øÈ£\t ÀâÁö¸í\t ¹ßÇàÀÎ\t °¡°İ\t ¹ßÇà¿¬µµ\t ÃâÆÇ»ç\t ¹ßÇà¿ù");
+		System.out.println("\nì¡ì§€ë²ˆí˜¸\t ì¡ì§€ëª…\t ë°œí–‰ì¸\t ê°€ê²©\t ë°œí–‰ì—°ë„\t ì¶œíŒì‚¬\t ë°œí–‰ì›”");
 		System.out.println("-----------------------------------------------------------");
 		System.out.println(javaWorld);
 		System.out.println(webWorld);
