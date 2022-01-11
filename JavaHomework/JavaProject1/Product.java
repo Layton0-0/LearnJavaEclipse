@@ -1,4 +1,4 @@
-package javaProject1;
+package JavaProject1;
 
 public class Product {
 	String prdNo;
