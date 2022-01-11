@@ -17,7 +17,6 @@ public class CompareMachine {
 				if(comNum.charAt(i) == userNum.charAt(j)) {
 					result[1]++;
 				}
-				
 			}
 			if(comNum.charAt(i) == userNum.charAt(i)) {
 				result[1]--;
