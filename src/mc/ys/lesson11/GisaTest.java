@@ -18,12 +18,24 @@ public class GisaTest {
 			list = this.readyData();
 			String answer1 = this.solveOne(list);
 			this.writeAnswer(answer1, 1);
+
 			String answer2 = this.solveTwo(list);
 			this.writeAnswer(answer2, 2);
+
+			String answer2_1 = this.solveTwoV2(list);
+			System.out.println("강사님 정답: " + answer2_1);
+
 			String answer3 = this.solveThree(list);
 			this.writeAnswer(answer3, 3);
+
+			String answer3_1 = this.solveThree_1(list);
+			System.out.println("강사님 정답: " + answer3_1);
+
 			String answer4 = this.solveFour(list);
 			this.writeAnswer(answer4, 4);
+
+			String answer4_1 = this.solveFour_1(list);
+			System.out.println("강사님 정답: " + answer4_1);
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -49,13 +61,11 @@ public class GisaTest {
 
 	private String solveOne(ArrayList<GisaDataVO> list) {
 		ArrayList<GisaDataVO> data = new ArrayList<>();
-		int idx = 0;
 		// 지역코드가 B인 데이터 찾기.
 		for (int i = 0; i < list.size(); i++) {
 			GisaDataVO temp = list.get(i);
 			if (temp.getLocCode().equals("B")) {
 				data.add(temp);
-				idx++;
 			}
 		}
 		// 국어+영어 내림차순 정렬 + 동일 학번에 대한 오름차순 정렬
@@ -81,13 +91,11 @@ public class GisaTest {
 	private String solveTwo(ArrayList<GisaDataVO> list) {
 		// 해당하는 문제를 해결하는 로직 작성
 		ArrayList<GisaDataVO> data = new ArrayList<>();
-		int idx = 0;
 		// 지역코드가 B인 데이터 찾기.
 		for (int i = 0; i < list.size(); i++) {
 			GisaDataVO temp = list.get(i);
 			if (temp.getLocCode().equals("B")) {
 				data.add(temp);
-				idx++;
 			}
 		}
 		// 국어+영어 내림차순 정렬 + 동일 학번에 대한 오름차순 정렬
@@ -104,10 +112,26 @@ public class GisaTest {
 
 		});
 
-		System.out.println("가장 큰값은 " + Integer.toString(data.get(1).getKor() + data.get(1).getEng()));
-		String answer2 = Integer.toString(data.get(1).getKor() + data.get(1).getEng());
+		System.out.println("가장 큰값은 " + Integer.toString(data.get(0).getKor() + data.get(0).getEng()));
+		String answer2 = Integer.toString(data.get(0).getKor() + data.get(0).getEng());
 
 		return "가장 큰값은 " + answer2;
+	}
+
+	// 강사님 정답
+	private String solveTwoV2(ArrayList<GisaDataVO> list) {
+		// TODO Auto-generated method stub
+		String answer = null;
+		// 해당하는 문제를 해결하는 로직 작성(최대값 로직)
+		int max = 0;
+		for (GisaDataVO vo : list) {
+			if (vo.getLocCode().equals("B")) {
+				int temp = vo.getKor() + vo.getEng();
+				max = max < temp ? temp : max;
+			}
+		}
+		answer = String.valueOf(max);
+		return answer;
 	}
 
 	private String solveThree(ArrayList<GisaDataVO> list) {
@@ -125,18 +149,18 @@ public class GisaTest {
 		for (int i = 0; i < data.size(); i++) {
 			GisaDataVO temp = data.get(i);
 			switch (temp.getMgrCode()) {
-			case "A": 
+			case "A":
 				result += (temp.getTotal() + 5);
 				break;
-				
-			case "B": 
+
+			case "B":
 				result += (temp.getTotal() + 15);
 				break;
-			
-			case "C": 
+
+			case "C":
 				result += (temp.getTotal() + 20);
 				break;
-			
+
 			}
 		}
 
@@ -146,6 +170,27 @@ public class GisaTest {
 		return "합계는 " + answer3;
 	}
 
+	private String solveThree_1(ArrayList<GisaDataVO> list) {
+		// TODO Auto-generated method stub
+		String answer = null;
+		int sum = 0; // 총점+point 누계
+		for (GisaDataVO vo : list) {
+			int point = 20; // 담임코드 C의 값으로 초기화
+			if (vo.getEng() + vo.getMath() >= 120) {
+				if (vo.getMgrCode().equals("A")) {
+					point = 5;
+				} else if (vo.getMgrCode().equals("B")) {
+					point = 15;
+				}
+				int total = vo.getTotal() + point; // 총점+point
+				sum = sum + total;
+			}
+
+		}
+		answer = String.valueOf(sum);
+		return answer;
+	}
+
 	private String solveFour(ArrayList<GisaDataVO> list) {
 		// 해당하는 문제를 해결하는 로직 작성
 		ArrayList<GisaDataVO> data = new ArrayList<>();
@@ -153,37 +198,58 @@ public class GisaTest {
 		// 성취도가 A 또는 B인 데이터 찾기.
 		for (int i = 0; i < list.size(); i++) {
 			GisaDataVO temp = list.get(i);
-			if ((temp.getAccCode().equals("A") || temp.getAccCode().equals("B"))) {
+			if (temp.getAccCode().equals("A") || temp.getAccCode().equals("B")) {
 				data.add(temp);
 			}
 		}
 		// 지역코드에 따라 점수포인트를 더하기 + 50 이상인 건수 세기
 		for (int i = 0; i < data.size(); i++) {
 			GisaDataVO temp = data.get(i);
-			int point = 0;
+			int point = 15;
 			switch (temp.getLocCode()) {
 			case "A":
-				point = temp.getKor() + 5;
+				point = 5;
 				break;
 			case "B":
-				point = temp.getKor() + 10;
+				point = 10;
 				break;
-			case "C":
-				point = temp.getKor() + 15;
-				break;	
 			}
-			
-			if(point >= 50)
-				result++;
-		}
-			
+			point += temp.getKor();
 
-		System.out.println(Integer.toString(result) + "건");
-		String answer4 = Integer.toString(result) + "건";
+			if (point >= 50)
+				result++;
+
+		}
+
+		System.out.println(String.valueOf(result) + "건");
+		String answer4 = String.valueOf(result) + "건";
 
 		return answer4;
 	}
-	
+
+	private String solveFour_1(ArrayList<GisaDataVO> list) {
+		// TODO Auto-generated method stub
+		String answer = null;
+		int count = 0; // 누적을 저장하는 변수
+		for (GisaDataVO vo : list) {
+			int point = 15; // 지역코드 C의 값으로 초기화
+			if (vo.getAccCode().equals("A") || vo.getAccCode().equals("B")) {
+				if (vo.getLocCode().equals("A")) {
+					point = 5;
+				} else if (vo.getLocCode().equals("B")) {
+					point = 10;
+				}
+				int total = vo.getKor() + point;
+				if (total >= 50) {
+					count++;// count += 1, count = count + 1
+				}
+			}
+			
+		}
+		answer = String.valueOf(count);
+		return answer;
+	}
+
 	private ArrayList<GisaDataVO> readyData() throws NumberFormatException, IOException {
 		// 파일의 1000라인의 정보를 GisaDataVO를 이용하여 인스턴스로 만들고 ArrayList에 저장
 		String line = null;

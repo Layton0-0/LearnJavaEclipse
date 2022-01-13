@@ -31,6 +31,7 @@ public class GisaDataVO {
 
 
 
+
 	public String getLocCode() {
 		return locCode;
 	}
