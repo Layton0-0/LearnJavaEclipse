@@ -57,7 +57,7 @@ public class GisaTest {
 		pw.close();
 		fw.close();
 
-	}
+	} 
 
 	private String solveOne(ArrayList<GisaDataVO> list) {
 		ArrayList<GisaDataVO> data = new ArrayList<>();
