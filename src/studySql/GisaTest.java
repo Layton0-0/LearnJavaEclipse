@@ -1,4 +1,4 @@
-package mc.ys.lesson11;
+package studySql;
 
 import java.util.*;
 import java.io.*;
@@ -13,31 +13,30 @@ public class GisaTest {
 	public void testStart() {
 		// 데이터준비
 		// file의 데이터를 ArrayList로 만들어서 준비
-		ArrayList<GisaDataVO> list;
+//		ArrayList<GisaDataVO> list;
 		try {
-			list = this.readyData();
-			String answer1 = this.solveOne(list);
-			this.writeAnswer(answer1, 1);
-
-			String answer2 = this.solveTwo(list);
-			this.writeAnswer(answer2, 2);
-
-			String answer2_1 = this.solveTwoV2(list);
-			System.out.println("강사님 정답: " + answer2_1);
-
-			String answer3 = this.solveThree(list);
-			this.writeAnswer(answer3, 3);
-
-			String answer3_1 = this.solveThree_1(list);
-			System.out.println("강사님 정답: " + answer3_1);
+//			list = this.readyData();
 			
-			this.solveThree_2();
+			this.solveOne();
 
-			String answer4 = this.solveFour(list);
-			this.writeAnswer(answer4, 4);
+//			String answer2 = this.solveTwo(list);
+//			this.writeAnswer(answer2, 2);
+//
+//			String answer2_1 = this.solveTwoV2(list);
+//			System.out.println("강사님 정답: " + answer2_1);
+//
+//			String answer3 = this.solveThree(list);
+//			this.writeAnswer(answer3, 3);
+//
+//			String answer3_1 = this.solveThree_1(list);
+//			System.out.println("강사님 정답: " + answer3_1);
+//			
+//			this.solveThree_2();
+//
+//			this.solveFour();
+//			
+//			this.solveFour_1();
 
-			String answer4_1 = this.solveFour_1(list);
-			System.out.println("강사님 정답: " + answer4_1);
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -61,33 +60,44 @@ public class GisaTest {
 
 	} 
 
-	private String solveOne(ArrayList<GisaDataVO> list) {
+	private void solveOne() throws NumberFormatException, IOException {
+		ArrayList<GisaDataVO> list = this.readyData();
 		ArrayList<GisaDataVO> data = new ArrayList<>();
 		// 지역코드가 B인 데이터 찾기.
-		for (int i = 0; i < list.size(); i++) {
-			GisaDataVO temp = list.get(i);
-			if (temp.getLocCode().equals("B")) {
+		for(GisaDataVO temp: list) {
+			if (temp.getLocCode().equals("B")) 
 				data.add(temp);
-			}
 		}
 		// 국어+영어 내림차순 정렬 + 동일 학번에 대한 오름차순 정렬
-		Collections.sort(data, new Comparator<GisaDataVO>() {
-
-			@Override
-			public int compare(GisaDataVO o1, GisaDataVO o2) {
-				int plus1 = o1.getKor() + o1.getEng();
-				int plus2 = o2.getKor() + o2.getEng();
-				int stdNo1 = o1.getStdNo();
-				int stdNo2 = o2.getStdNo();
-				return plus1 > plus2 ? -1 : (plus1 == plus2 ? (stdNo1 < stdNo2 ? -1 : 1) : 1);
-			}
-
-		});
+//		Collections.sort(data, new Comparator<GisaDataVO>() {
+//
+//			@Override
+//			public int compare(GisaDataVO o1, GisaDataVO o2) {
+//				int result = 0;
+//				result = (o2.getKor() + o2.getEng()) - (o1.getKor() + o1.getEng());
+//				if(result == 0) {
+//					result = o2.getStdNo() - o1.getStdNo();
+//				}
+//				return result;
+//			}
+//
+//		});
+		
+		Collections.sort(data, new MyComparator());
+		this.print(data);
 
 		System.out.println("5번째 학번은 " + Integer.toString(data.get(4).getStdNo()));
 		String answer1 = Integer.toString(data.get(4).getStdNo());
+		
+		this.writeAnswer(answer1, 1);
+	}
 
-		return "5번째 학번은 " + answer1;
+	private void print(ArrayList<GisaDataVO> temp) {
+		// TODO Auto-generated method stub
+		for(int i = 0; i < 10; i++) {
+			GisaDataVO vo = temp.get(i);
+			System.out.println(vo);
+		}
 	}
 
 	private String solveTwo(ArrayList<GisaDataVO> list) {
@@ -214,8 +224,8 @@ public class GisaTest {
 		this.writeAnswer(answer, 3);
 	}
 
-	private String solveFour(ArrayList<GisaDataVO> list) {
-		// 해당하는 문제를 해결하는 로직 작성
+	private void solveFour() throws NumberFormatException, IOException {
+		ArrayList<GisaDataVO> list = this.readyData();
 		ArrayList<GisaDataVO> data = new ArrayList<>();
 		int result = 0;
 		// 성취도가 A 또는 B인 데이터 찾기.
@@ -246,12 +256,11 @@ public class GisaTest {
 
 		System.out.println(String.valueOf(result) + "건");
 		String answer4 = String.valueOf(result) + "건";
-
-		return answer4;
+		this.writeAnswer(answer4, 4);
 	}
 
-	private String solveFour_1(ArrayList<GisaDataVO> list) {
-		// TODO Auto-generated method stub
+	private void solveFour_1() throws IOException {
+		ArrayList<GisaDataVO> list = this.readyData();
 		String answer = null;
 		int count = 0; // 누적을 저장하는 변수
 		for (GisaDataVO vo : list) {
@@ -270,7 +279,7 @@ public class GisaTest {
 			
 		}
 		answer = String.valueOf(count);
-		return answer;
+		this.writeAnswer(answer, 4);
 	}
 
 	private ArrayList<GisaDataVO> readyData() throws NumberFormatException, IOException {
